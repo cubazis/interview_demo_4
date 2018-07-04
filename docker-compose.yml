@@ -5,24 +5,26 @@ services:
 #----------------------------------------#
     nginx:
         container_name: nginx
-        image: nginx:latest
+#        build: ./images/nginx
+        image: cubazis/nginx:demo4
         ports:
             - "8000:8000"
             - "8001:8001"
+            - "9000:9000"
             - "443:443"
         volumes:
             - ./nginx:/etc/nginx/conf.d
-            - ./www:/var/www
             - ./logs:/var/log/nginx
-        links:
+        volumes_from:
             - php
 
 #----------------------------------------#
     php:
         container_name: php
-        build: ./images/php
+#        build: ./images/laravel
+        image: cubazis/php:demo4
         volumes:
-            - ./www/backend:/var/www/backend
+            - ./www:/var/www
 #----------------------------------------#
 
 #----------------------------------------#
