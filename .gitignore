@@ -18,3 +18,28 @@ out
 
 ### Other ###
 tags
+
+### React ###
+www/frontend/node_modules/*
+www/frontend/package-lock.json
+www/frontend/static/*
+www/frontend/*.log
+www/frontend/dist
+www/frontend/coverage
+
+# www/frontend/build/*
+
+www/frontend/.yarn-cache
+www/frontend/.gitignore
+www/frontend/README.md
+
+# misc
+www/frontend/.DS_Store
+www/frontend/.env.local
+www/frontend/.env.development.local
+www/frontend/.env.test.local
+www/frontend/.env.production.local
+
+www/frontend/npm-debug.log*
+www/frontend/yarn-debug.log*
+www/frontend/yarn-error.log*

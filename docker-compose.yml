@@ -11,3 +11,11 @@ services:
             - ./nginx:/etc/nginx/conf.d
             - ./www:/var/www
             - ./logs:/var/log/nginx
+#    client:
+#        container_name: dev
+#        build:
+#            context: ./www/frontend
+#        ports:
+#            - "3000:3000"
+#        volumes:
+#          - ./www/frontend:/client
