@@ -1,16 +1,31 @@
+#----------------------------------------#
 version: '2'
-
+#----------------------------------------#
 services:
+#----------------------------------------#
     nginx:
         container_name: nginx
         image: nginx:latest
         ports:
             - "8000:8000"
+            - "8001:8001"
             - "443:443"
         volumes:
             - ./nginx:/etc/nginx/conf.d
             - ./www:/var/www
             - ./logs:/var/log/nginx
+        links:
+            - php
+
+#----------------------------------------#
+    php:
+        container_name: php
+        build: ./images/php
+        volumes:
+            - ./www/backend:/var/www/backend
+#----------------------------------------#
+
+#----------------------------------------#
 #    client:
 #        container_name: dev
 #        build:
@@ -19,3 +34,4 @@ services:
 #            - "3000:3000"
 #        volumes:
 #          - ./www/frontend:/client
+#----------------------------------------#

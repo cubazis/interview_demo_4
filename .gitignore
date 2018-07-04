@@ -43,3 +43,8 @@ www/frontend/.env.production.local
 www/frontend/npm-debug.log*
 www/frontend/yarn-debug.log*
 www/frontend/yarn-error.log*
+
+### Docker ###
+
+## PHP ##
+www/backend/*_log*
