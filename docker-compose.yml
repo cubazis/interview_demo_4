@@ -5,8 +5,8 @@ services:
 #----------------------------------------#
     nginx:
         container_name: nginx
-#        build: ./images/nginx
-        image: cubazis/nginx:demo4
+        build: ./images/nginx
+#        image: cubazis/nginx:demo4
         ports:
             - "8000:8000"
             - "8001:8001"
@@ -17,23 +17,57 @@ services:
             - ./logs:/var/log/nginx
         volumes_from:
             - php
+        networks:
+            demo4_network:
+                aliases:
+                    - nginx
 
 #----------------------------------------#
     php:
         container_name: php
-#        build: ./images/laravel
-        image: cubazis/php:demo4
+        build: ./images/laravel
+#        image: cubazis/php:demo4
         volumes:
             - ./www:/var/www
+#        links:
+#            - mysql
+#        environment:
+#            DB_HOST: mysql
+#           DB_PORT: 3306
+        networks:
+            demo4_network:
+                aliases:
+                    - php
+#----------------------------------------#
+#    mysql:
+#        container_name: mysql
+#        build: ./images/db
+#        ports:
+#            - "3306:3306"
+#        expose:
+#            - "3306"
+#        volumes:
+#            - ./db:/var/lib/mysql
+#        environment:
+#            MYSQL_ROOT_PASSWORD: pass
+#            MYSQL_DATABASE: mydb
+#            MYSQL_USER: testu
+#            MYSQL_PASSWORD: testp
+#        networks:
+#            demo4_network:
+#                aliases:
+#                    - mysql
+#----------------------------------------#
+    client:
+        container_name: dev
+        build:
+            context: ./www/frontend
+        ports:
+            - "3000:3000"
+        volumes:
+          - ./www/frontend:/client
 #----------------------------------------#
 
-#----------------------------------------#
-#    client:
-#        container_name: dev
-#        build:
-#            context: ./www/frontend
-#        ports:
-#            - "3000:3000"
-#        volumes:
-#          - ./www/frontend:/client
-#----------------------------------------#
+networks:
+    demo4_network:
+        driver: bridge
